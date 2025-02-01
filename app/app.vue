@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Footer from './components/ui/footer/Footer.vue';
-import Header from './components/ui/header/Header.vue';
 
 useHead({
     title: 'Krieger IT',
@@ -16,10 +14,10 @@ useHead({
 <template>
     <NuxtRouteAnnouncer />
     <NuxtLayout>
-        <Header />
+        <Header></Header>
         <div>
             <NuxtPage />
         </div>
-        <Footer />
+        <Footer></Footer>
     </NuxtLayout>
 </template>
