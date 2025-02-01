@@ -1,6 +1,5 @@
-@tailwind components;
-@tailwind utilities;
-@tailwind base;
+@import "tailwindcss";
+@config "../../../tailwind.config.js";
 
 @layer base {
     :root {
@@ -16,7 +15,7 @@
         --primary: 210 90% 50%; /* Vibrant blue */
         --primary-foreground: 0 0% 100%; /* White text */
 
-        --secondary: 15 80% 65%; /* Warm orange */
+        --secondary: 0, 100%, 67%; /* Warm orange */
         --secondary-foreground: 0 0% 100%; /* White for contrast */
 
         --accent: 240 4.8% 92%;
@@ -44,10 +43,10 @@
         --popover: 0 0% 9%;
         --popover-foreground: 220 20% 95%;
 
-        --primary: 210 80% 60%; /* Softer blue */
+        --primary: 210 90% 50%; /* Softer blue */
         --primary-foreground: 0 0% 100%; /* White text */
 
-        --secondary: 15 70% 55%; /* Softer orange */
+        --secondary: 0, 100%, 67%; /* Softer orange */
         --secondary-foreground: 0 0% 100%; /* White text */
 
         --accent: 12 6.5% 15.1%;

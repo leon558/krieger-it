@@ -1,4 +1,5 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from "@tailwindcss/vite";
+
 export default defineNuxtConfig({
     compatibilityDate: "2024-11-01",
     future: {
@@ -13,27 +14,14 @@ export default defineNuxtConfig({
     nitro: {
         preset: "cloudflare-pages",
     },
-    tailwindcss: {
-        cssPath: ["./app/index.css", { injectPosition: "first" }],
-        viewer: true,
-        exposeConfig: false,
+    css: ["@/assets/css/main.css"],
+    vite: {
+        plugins: [tailwindcss()],
     },
-    shadcn: {
-        /**
-         * Prefix for all the imported component
-         */
-        prefix: "",
-        /**
-         * Directory that the component lives in.
-         * @default "./components/ui"
-         */
-        componentDir: "./app/components/ui",
+    router: {
+        options: {
+            scrollBehaviorType: "smooth",
+        },
     },
-
-    modules: [
-        "nitro-cloudflare-dev",
-        "@nuxtjs/tailwindcss",
-        "shadcn-nuxt",
-        "@nuxtjs/color-mode",
-    ],
+    modules: ["nitro-cloudflare-dev", "@nuxtjs/color-mode"],
 });
