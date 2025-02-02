@@ -5,7 +5,7 @@ useRoute('imprint');
 
 <template>
     <div class="max-w-6xl mx-auto px-4 py-12">
-        <div class="pb-4">
+        <section id="imprint" class="pb-4">
             <h1 class="text-2xl pb-4">Impressum</h1>
             <h2 class="text-xl">Angaben gemäß § 5 TMG</h2>
             <p>Leon Krieger<br />
@@ -21,8 +21,8 @@ useRoute('imprint');
             <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
                 Verbraucherschlichtungsstelle
                 teilzunehmen.</p>
-        </div>
-        <div>
+        </section>
+        <section id="privacy" class="pt-24 -mt-18">
             <h2 class="text-2xl font-bold pb-4">Datenschutz­erklärung</h2>
             <h3 class="text-xl font-bold pb-2">1. Datenschutz auf einen Blick</h3>
             <h4 class="text-lg">Allgemeine Hinweise</h4>
@@ -549,6 +549,6 @@ useRoute('imprint');
                 über
                 unseren Cookie-Einstellungs-Dialog.
             </p>
-        </div>
+        </section>
     </div>
 </template>
