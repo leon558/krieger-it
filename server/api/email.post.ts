@@ -14,8 +14,8 @@ export default defineEventHandler(async (event) => {
 
     const resend = new Resend(event.context.cloudflare.env.RESEND_API_KEY);
     const { data, error } = await resend.emails.send({
-        from: 'info@contact.krieger.biz',
-        to: 'info@krieger.biz',
+        from: event.context.cloudflare.env.EMAIL_FROM,
+        to: event.context.cloudflare.env.EMAIL_TO,
         subject: `Kontaktanfrage von ${surname} ${name} - ${address}`,
         html: message + `<br/><br/>${surname} ${name}<br/>${address}`,
         text: message + `\n${surname} ${name}\n${address}`,
