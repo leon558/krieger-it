@@ -6,12 +6,9 @@ declare module "h3" {
         cloudflare: {
             request: Request;
             env: {
-                EMAIL_HOST: string;
-                EMAIL_PORT: string;
-                EMAIL_SECURE: string;
-                EMAIL_USER: string;
-                EMAIL_PASS: string;
                 EMAIL_TO: string;
+                EMAIL_FROM: string;
+                RESEND_API_KEY: string;
             };
             context: ExecutionContext;
         };

@@ -1,51 +1,32 @@
-import nodemailer from "nodemailer";
-import type SMTPTransport from "nodemailer/lib/smtp-transport";
+import { Resend } from "resend";
 import { defineEventHandler, readBody } from "h3";
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     const { surname, name, address, message } = body;
-    console.log(body);
-    
+
     if (!surname || !name || !address || !message) {
         throw createError({
             statusCode: 400,
             statusMessage: "Surname, name, email, and message are required!",
         });
     }
-    try {
-        console.log(event.context.cloudflare.env.EMAIL_HOST);
-        console.log(event.context.cloudflare.env.EMAIL_PORT);
-        console.log(event.context.cloudflare.env.EMAIL_SECURE);
-        console.log(event.context.cloudflare.env.EMAIL_USER);
-        console.log(event.context.cloudflare.env.EMAIL_PASS);
-        console.log(event.context.cloudflare.env.EMAIL_TO);
-        
-        const transporter = nodemailer.createTransport({
-            host: event.context.cloudflare.env.EMAIL_HOST,
-            port: Number(event.context.cloudflare.env.EMAIL_PORT),
-            secure: event.context.cloudflare.env.EMAIL_SECURE != 'false', // true for port 465, false for other ports
-            auth: {
-                user: event.context.cloudflare.env.EMAIL_USER,
-                pass: event.context.cloudflare.env.EMAIL_PASS,
-            },
-        } as SMTPTransport.Options);
-        
-        const mailOptions = {
-            from: event.context.cloudflare.env.EMAIL_USER,
-            to: event.context.cloudflare.env.EMAIL_TO,
-            subject: `Kontaktanfrage von ${surname} ${name} - ${address}`,
-            text: message + `\n\n${surname} ${name}\n${address}`,
-        };
 
-        await transporter.sendMail(mailOptions);
-
-        return "Email sent successfully.";
-    } catch (error) {
-        console.error(error);
+    const resend = new Resend(event.context.cloudflare.env.RESEND_API_KEY);
+    const { data, error } = await resend.emails.send({
+        from: 'info@contact.krieger.biz',
+        to: 'info@krieger.biz',
+        subject: `Kontaktanfrage von ${surname} ${name} - ${address}`,
+        html: message + `<br/><br/>${surname} ${name}<br/>${address}`,
+        text: message + `\n${surname} ${name}\n${address}`,
+    });
+    if (error) {
+        console.log(error);
         throw createError({
             statusCode: 500,
             statusMessage: "Error sending Email",
         });
     }
+    console.log(data);
+    return "Email sent successfully.";
 });
