@@ -27,8 +27,8 @@ export default defineEventHandler(async (event) => {
         const mailOptions = {
             from: event.context.cloudflare.env.EMAIL_USER,
             to: event.context.cloudflare.env.EMAIL_TO,
-            subject: `Kontaktanfrage von ${surname} ${name}`,
-            text: message,
+            subject: `Kontaktanfrage von ${surname} ${name} - ${address}`,
+            text: message + `\n\n${surname} ${name}\n${address}`,
         };
 
         await transporter.sendMail(mailOptions);
