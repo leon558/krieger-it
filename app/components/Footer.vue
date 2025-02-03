@@ -2,15 +2,21 @@
     <footer class="bg-background border-t border-border text-foreground">
         <div class="container mx-auto px-4 py-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Column 1: About -->
-                <div>
-                    <h3 class="text-lg font-bold text-primary mb-4">About Me</h3>
-                    <p class="text-muted-foreground">
-                        
-                    </p>
+                <div class="text-center">
+                    <h3 class="text-lg font-bold text-primary mb-4">Info</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <NuxtLink :to="{ path: 'imprint', hash: '' }" class="hover:text-primary transition-colors">
+                                Imprint
+                            </NuxtLink>
+                        </li>
+                        <li>
+                            <NuxtLink :to="{ path: 'imprint', hash: '#privacy' }"
+                                class="hover:text-primary transition-colors">Privacy Policy
+                            </NuxtLink>
+                        </li>
+                    </ul>
                 </div>
-
-                <!-- Column 2: Navigation -->
                 <div class="text-center">
                     <h3 class="text-lg font-bold text-primary mb-4">Quick Links</h3>
                     <ul class="space-y-2">
@@ -33,20 +39,8 @@
                                 class="hover:text-primary transition-colors">Contact
                             </NuxtLink>
                         </li>
-                        <li>
-                            <NuxtLink :to="{ path: 'imprint', hash: '' }"
-                                class="hover:text-primary transition-colors">Imprint
-                            </NuxtLink>
-                        </li>
-                        <li>
-                            <NuxtLink :to="{ path: 'imprint', hash: '#privacy' }"
-                                class="hover:text-primary transition-colors">Privacy Policy
-                            </NuxtLink>
-                        </li>
                     </ul>
                 </div>
-
-                <!-- Column 3: Social Media -->
                 <div class="text-center">
                     <h3 class="text-lg font-bold text-primary mb-4">Connect with Me</h3>
                     <ul class="flex space-x-4 justify-center">

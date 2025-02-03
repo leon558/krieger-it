@@ -2,11 +2,8 @@
     <header class="sticky top-0 z-50 border-b bg-background text-foreground">
         <div class="container mx-auto flex items-center justify-between px-4 py-3">
             <!-- Mobile Menu Toggle -->
-            <button @click="toggleMenu" class="md:hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
+            <button @click="toggleMenu" class="md:hidden hover:text-primary transition-colors cursor-pointer">
+                <Menu />
             </button>
             <!-- Logo -->
             <div class="text-2xl font-bold text-primary">
@@ -86,7 +83,7 @@
         <!-- Mobile Nav -->
         <div v-if="isMenuOpen" class="md:hidden bg-background text-foreground shadow-md border-t border-border">
             <div class="flex flex-col items-center space-y-4 py-4">
-                <NuxtLink to="/" class="hover:text-primary transition-colors" @click="closeMenu">Home</NuxtLink>
+                <NuxtLink :to="{ path: '/', hash: '#home' }" class="hover:text-primary transition-colors" @click="closeMenu">Home</NuxtLink>
                 <NuxtLink :to="{ path: '/', hash: '#about' }" class="hover:text-primary transition-colors" @click="closeMenu">About Me
                 </NuxtLink>
                 <NuxtLink :to="{ path: '/', hash: '#tech' }" class="hover:text-primary transition-colors" @click="closeMenu">Technologies
@@ -100,16 +97,21 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { Menu } from 'lucide-vue-next';
 
 const colorMode = useColorMode();
-console.log(colorMode);
 
 const isMenuOpen = ref(false);
 const language = ref(0); // 0 = en, 1 = de
 
-const toggleMenu = () => {
+defineExpose({
+    isMenuOpen
+})
+
+const toggleMenu = (event: any) => {    
     isMenuOpen.value = !isMenuOpen.value;
 };
+
 
 const toogleLanguage = () => {
     language.value = language.value === 0 ? 1 : 0;
@@ -118,7 +120,7 @@ const toogleLanguage = () => {
 const toogleDarkMode = () => {
     colorMode.preference = colorMode.value === 'light' ? 'dark' : 'light';
 };
-const closeMenu = () => {
+const closeMenu = (event: any) => {
     isMenuOpen.value = false;
 };
 

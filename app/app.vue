@@ -1,3 +1,15 @@
+
+<template>
+    <NuxtRouteAnnouncer />
+    <NuxtLayout>
+        <Header ref="header"></Header>
+        <div @click="checkMenu">
+            <NuxtPage />
+        </div>
+        <Footer></Footer>
+    </NuxtLayout>
+</template>
+
 <script setup lang="ts">
 
 useHead({
@@ -9,15 +21,12 @@ useHead({
         { rel: 'icon', type: 'image/x-icon', href: './favicon.ico' }
     ]
 })
-</script>
 
-<template>
-    <NuxtRouteAnnouncer />
-    <NuxtLayout>
-        <Header></Header>
-        <div>
-            <NuxtPage />
-        </div>
-        <Footer></Footer>
-    </NuxtLayout>
-</template>
+const headerRef = useTemplateRef('header')
+
+const checkMenu = ($event : Event) => {
+    if(headerRef.value?.isMenuOpen) {
+        headerRef.value.isMenuOpen = false;
+    }
+}
+</script>
