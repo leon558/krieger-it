@@ -14,6 +14,13 @@ export default defineEventHandler(async (event) => {
         });
     }
     try {
+        console.log(event.context.cloudflare.env.EMAIL_HOST);
+        console.log(event.context.cloudflare.env.EMAIL_PORT);
+        console.log(event.context.cloudflare.env.EMAIL_SECURE);
+        console.log(event.context.cloudflare.env.EMAIL_USER);
+        console.log(event.context.cloudflare.env.EMAIL_PASS);
+        console.log(event.context.cloudflare.env.EMAIL_TO);
+        
         const transporter = nodemailer.createTransport({
             host: event.context.cloudflare.env.EMAIL_HOST,
             port: Number(event.context.cloudflare.env.EMAIL_PORT),
