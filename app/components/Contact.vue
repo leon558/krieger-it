@@ -21,7 +21,7 @@
                     <!-- Last Name -->
                     <div class="col-span-2 md:col-span-1">
                         <label for="last-name" class="block text-sm">
-                            {{ t("name") }}    
+                            {{ t("name") }}
                         </label>
                         <input type="text" id="last-name" autocomplete="family-name" v-model="email.name"
                             class="mt-1 block w-full bg-input rounded outline-border" required>
@@ -30,7 +30,7 @@
                     <!-- Email -->
                     <div class="col-span-2">
                         <label for="email" class="block text-sm">
-                            {{ t("email") }}    
+                            {{ t("email") }}
                         </label>
                         <input type="email" id="email" autocomplete="email" v-model="email.address"
                             class="mt-1 block w-full bg-input rounded outline-border" required>
@@ -42,6 +42,7 @@
                         <textarea id="message" rows="10" v-model="email.message"
                             class="mt-1 block w-full bg-input rounded outline-border" required></textarea>
                     </div>
+                    <NuxtTurnstile ref="turnstile" class="col-span-2 flex justify-center" v-model="email.token" />
                     <!-- Submit Button -->
                     <div class="col-span-2">
                         <button type="submit"
@@ -64,20 +65,27 @@
 import { LoaderCircle } from 'lucide-vue-next'
 const { t } = useI18n({ useScope: 'local' });
 
+const turnstile = ref();
 const status = ref(0);
 const statusMessage = ref('ok');
 const email = ref({
     surname: '',
     name: '',
     address: '',
-    message: ''
+    message: '',
+    token: ''
 })
 
 
 const sendEmail = async () => {
+    if (!email.value.token) {
+        status.value = -1;
+        statusMessage.value = t('captcha');
+        return;
+    }
     try {
         status.value = 1;
-        statusMessage.value = "Message sending...";
+        statusMessage.value = t('sending');
         const response = await fetch('/api/email', {
             method: 'post',
             headers: {
@@ -87,16 +95,17 @@ const sendEmail = async () => {
         })
         if (response.status === 200) {
             status.value = 2;
-            statusMessage.value = "Message sent!";
+            statusMessage.value = t('sent');
+            turnstile.value?.reset();
         } else {
             console.log(response); // Log for debugging, can be removed
             status.value = -1;
-            statusMessage.value = "Message could not be sent!";
+            statusMessage.value = t('error');
         }
     } catch (error) {
         console.log(error); // Log for debugging, can be removed
         status.value = -1;
-        statusMessage.value = "Message could not be sent!";
+        statusMessage.value = t('error');
     } finally {
         // Reset form after submission
         if (status.value >= 0) {
@@ -112,6 +121,7 @@ const sendEmail = async () => {
         }, 5000);
     }
 }
+
 </script>
 
 <i18n lang="json">{
@@ -122,7 +132,11 @@ const sendEmail = async () => {
         "name": "Last Name",
         "email": "Email Address",
         "message": "Message",
-        "send": "Send Message"
+        "send": "Send Message",
+        "sending": "Message sending...",
+        "sent": "Message sent!",
+        "error": "Message could not be sent!",
+        "captcha": "Captcha missing!"
     },
     "de": {
         "text": "Starten Sie Ihre digitale Transformation",
@@ -131,6 +145,10 @@ const sendEmail = async () => {
         "name": "Nachname",
         "email": "E-Mail-Adresse",
         "message": "Nachricht",
-        "send": "Nachricht senden"
+        "send": "Nachricht senden",
+        "sending": "Nachricht wird gesendet...",
+        "sent": "Nachricht gesendet!",
+        "error": "Nachricht konnte nicht gesendet werden!",
+        "captcha": "Captcha fehlt!"
     }
 }</i18n>

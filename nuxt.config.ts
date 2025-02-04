@@ -26,5 +26,13 @@ export default defineNuxtConfig({
     i18n: {
         vueI18n: "./i18n.config.ts",
     },
-    modules: ["nitro-cloudflare-dev", "@nuxtjs/color-mode", "@nuxtjs/i18n"],
+    turnstile: {
+        siteKey: "0x4AAAAAAA7jC_DbymdA6GZC",
+    },
+    modules: [
+        "nitro-cloudflare-dev",
+        "@nuxtjs/color-mode",
+        "@nuxtjs/i18n",
+        "@nuxtjs/turnstile",
+    ],
 });

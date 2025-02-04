@@ -1,14 +1,41 @@
 import { Resend } from "resend";
 import { defineEventHandler, readBody } from "h3";
 
-export default defineEventHandler(async (event) => {
-    const body = await readBody(event);
-    const { surname, name, address, message } = body;
+export interface TurnstileValidationResponse {
+    success: boolean;
+    hostname: string;
+    errorCodes: any[];
+    challenge_ts?: string;
+    action?: string;
+    cdata?: string;
+}
 
-    if (!surname || !name || !address || !message) {
+export default defineEventHandler(async (event) => {
+    const endpoint =
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+    const body = await readBody(event);
+    const { surname, name, address, message, token } = body;
+
+    if (!surname || !name || !address || !message || !token) {
         throw createError({
             statusCode: 400,
-            statusMessage: "Surname, name, email, and message are required!",
+            statusMessage:
+                "Surname, name, email, message and token are required!",
+        });
+    }
+
+    const tokenValid : TurnstileValidationResponse = await $fetch(endpoint, {
+        method: "POST",
+        body: `secret=${encodeURIComponent(event.context.cloudflare.env.NUXT_TURNSTILE_SECRET_KEY)}&response=${encodeURIComponent(token)}`,
+        headers: {
+            "content-type": "application/x-www-form-urlencoded",
+        },
+    });
+
+    if (!tokenValid.success) {
+        throw createError({
+            statusCode: 400,
+            statusMessage: "Invalid token!",
         });
     }
 
@@ -27,6 +54,5 @@ export default defineEventHandler(async (event) => {
             statusMessage: "Error sending Email",
         });
     }
-    console.log(data);
     return "Email sent successfully.";
 });

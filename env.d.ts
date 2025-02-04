@@ -9,6 +9,7 @@ declare module "h3" {
                 EMAIL_TO: string;
                 EMAIL_FROM: string;
                 RESEND_API_KEY: string;
+                NUXT_TURNSTILE_SECRET_KEY: string;
             };
             context: ExecutionContext;
         };
