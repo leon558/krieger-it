@@ -23,5 +23,8 @@ export default defineNuxtConfig({
             scrollBehaviorType: "smooth",
         },
     },
-    modules: ["nitro-cloudflare-dev", "@nuxtjs/color-mode"],
+    i18n: {
+        vueI18n: "./i18n.config.ts",
+    },
+    modules: ["nitro-cloudflare-dev", "@nuxtjs/color-mode", "@nuxtjs/i18n"],
 });

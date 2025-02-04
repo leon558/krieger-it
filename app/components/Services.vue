@@ -1,7 +1,7 @@
 <template>
     <div class="max-w-7xl mx-auto">
         <h2 class="text-3xl font-bold text-center mb-16 text-foreground">
-            My Expertise
+            {{ t("expertise") }}
         </h2>
         <div class="grid md:grid-cols-3 gap-8">
             <div v-for="service in services" :key="service.title"
@@ -27,40 +27,87 @@
 
 <script setup lang="ts">
 import { CheckCircle2, Code2, ServerCog, BrainCircuit } from 'lucide-vue-next'
+const { t } = useI18n({ useScope: 'local' });
 
-const services = [
+const services = computed(() => {
+    return [
     {
-        title: 'Software Development',
+        title: t("software"),
         icon: Code2,
-        description: 'Tailored solutions that drive business growth',
+        description: t("software2"),
         items: [
-            'Web & Mobile Applications',
-            'API Development & Integration',
-            'Legacy System Modernization',
-            'Cloud-native Development'
+            t("software3"),
+            t("software4"),
+            t("software5"),
+            t("software6")
         ]
     },
     {
-        title: 'Managed IT Services',
+        title: t("services"),
         icon: ServerCog,
-        description: 'Comprehensive infrastructure management',
+        description: t("services2"),
         items: [
-            'Network Management',
-            'Cloud Solutions & Migration',
-            'Cybersecurity Solutions',
-            '24/7 System Monitoring'
+            t("services3"),
+            t("services4"),
+            t("services5"),
+            t("services6")
         ]
     },
     {
-        title: 'Strategic IT Consulting',
+        title: t("consulting"),
         icon: BrainCircuit,
-        description: 'Technology roadmap development',
+        description: t("consulting2"),
         items: [
-            'Digital Transformation Strategy',
-            'Technology Audits',
-            'CI/CD Pipeline Implementation',
-            'Scalability Planning'
+            t("consulting3"),
+            t("consulting4"),
+            t("consulting5"),
+            t("consulting6")
         ]
     }
-]
+]})
 </script>
+
+<i18n lang="json">{
+    "en": {
+        "expertise": "My Expertise",
+        "software": "Software Development",
+        "software2": "Tailored solutions that drive business growth",
+        "software3": "Web & Mobile Applications",
+        "software4": "API Development & Integration",
+        "software5": "CI/CD Pipeline Implementation",
+        "software6": "Cloud-native Development",
+        "services": "Managed IT Services",
+        "services2": "Comprehensive infrastructure management",
+        "services3": "Network Management",
+        "services4": "Cloud Solutions & Migration",
+        "services5": "Cybersecurity Solutions",
+        "services6": "24/7 System Monitoring",
+        "consulting": "Strategic IT Consulting",
+        "consulting2": "Technology roadmap development",
+        "consulting3": "Digital Transformation Strategy",
+        "consulting4": "Technology Audits",
+        "consulting5": "Legacy System Modernization",
+        "consulting6": "Scalability Planning"
+    },
+    "de": {
+        "expertise": "Meine Expertise",
+        "software": "Software Entwicklung",
+        "software2": "Maßgeschneiderte Lösungen",
+        "software3": "Web & Mobile Applikationen",
+        "software4": "API Entwicklung & Integration",
+        "software5": "CI/CD Pipeline Implementation",
+        "software6": "Cloud-native Entwicklung",
+        "services": "IT-Dienstleistungen",
+        "services2": "Umfassendes Infrastrukturmanagement",
+        "services3": "Netwerkmanagement",
+        "services4": "Cloud Lösungen & Migration",
+        "services5": "Cybersecurity Lösungen",
+        "services6": "24/7 System Überwachung",
+        "consulting": "Strategische IT Beratung",
+        "consulting2": "Entwicklung von Technologie-Roadmaps",
+        "consulting3": "Strategie zur digitalen Transformation",
+        "consulting4": "Technologie Audits",
+        "consulting5": "Modernisierung von Altsystemen",
+        "consulting6": "Skalierungsplanung"
+    }
+}</i18n>

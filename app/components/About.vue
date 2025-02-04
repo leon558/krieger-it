@@ -3,10 +3,10 @@
         <div class="grid md:grid-cols-2 gap-12 items-center">
             <div>
                 <h2 class="text-3xl font-bold mb-6 text-foreground">
-                    Technology Partnership Approach
+                    {{ t("text") }}
                 </h2>
                 <p class="text-muted-foreground mb-8">
-                    I align my expertise with your business goals through:
+                    {{ t("subtext") }}
                 </p>
                 <div class="space-y-6">
                     <div v-for="point in differentiators" :key="point.title" class="flex">
@@ -28,23 +28,50 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { Rocket, ShieldCheck, Users } from 'lucide-vue-next'
 
-const differentiators = [
+const { t } = useI18n({ useScope: 'local' });
+
+const differentiators = computed(() => {
+    return [
     {
-        title: 'Proven Methodologies',
-        description: 'Agile development processes ensuring timely delivery',
+        title: t("methods"),
+        description: t("methods2"),
         icon: Rocket
     },
     {
-        title: 'Enterprise-grade Security',
-        description: 'Security-first approach in all solutions',
+        title: t("security"),
+        description: t("security2"),
         icon: ShieldCheck
     },
     {
-        title: 'Client-Centric Approach',
-        description: 'Dedicated partnership model for continuous success',
+        title: t("client"),
+        description: t("client2"),
         icon: Users
     }
-]
+]})
 </script>
+
+<i18n lang="json">{
+    "en": {
+        "text": "Technology Partnership Approach",
+        "subtext": "I align my expertise with your business goals through:",
+        "methods": "Proven Methodologies",
+        "methods2": "Agile development processes ensuring timely delivery",
+        "security": "Enterprise-grade Security",
+        "security2": "Security-first approach in all solutions",
+        "client": "Client-Centric Approach",
+        "client2": "Dedicated partnership model for continuous success"
+    },
+    "de": {
+        "text": "Kooperative Technologielösungen",
+        "subtext": "Ich bringe mein Know-how in Einklang mit Ihren Zielen:",
+        "methods": "Bewährte Methoden",
+        "methods2": "Agile Entwicklungsprozesse für eine termingerechte Lieferung",
+        "security": "Höchste Sicherheitsstandards",
+        "security2": "Sicherheitsorientierter Ansatz in allen Lösungen",
+        "client": "Kundenorientierter Ansatz",
+        "client2": "Engagiertes Partnerschaftsmodell für nachhaltigen Erfolg"
+    }
+}</i18n>

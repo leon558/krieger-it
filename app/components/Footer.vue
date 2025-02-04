@@ -3,46 +3,49 @@
         <div class="container mx-auto px-4 py-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="text-center">
-                    <h3 class="text-lg font-bold text-primary mb-4">Info</h3>
+                    <h3 class="text-lg font-bold text-primary mb-4">{{ t("info") }}</h3>
                     <ul class="space-y-2">
                         <li>
                             <NuxtLink :to="{ path: 'imprint', hash: '' }" class="hover:text-primary transition-colors">
-                                Imprint
+                                {{ t('imprint') }}
                             </NuxtLink>
                         </li>
                         <li>
                             <NuxtLink :to="{ path: 'imprint', hash: '#privacy' }"
-                                class="hover:text-primary transition-colors">Privacy Policy
+                                class="hover:text-primary transition-colors">
+                                {{ t('privacy') }}
                             </NuxtLink>
                         </li>
                     </ul>
                 </div>
                 <div class="text-center">
-                    <h3 class="text-lg font-bold text-primary mb-4">Quick Links</h3>
+                    <h3 class="text-lg font-bold text-primary mb-4">{{ t("links") }}</h3>
                     <ul class="space-y-2">
                         <li>
                             <NuxtLink :to="{ path: '/', hash: '#home' }" class="hover:text-primary transition-colors">
-                                Home</NuxtLink>
+                                {{ t('home') }}
+                            </NuxtLink>
                         </li>
                         <li>
                             <NuxtLink :to="{ path: '/', hash: '#about' }" class="hover:text-primary transition-colors">
-                                Services
+                                {{ t('services') }}
                             </NuxtLink>
                         </li>
                         <li>
                             <NuxtLink :to="{ path: '/', hash: '#tech' }" class="hover:text-primary transition-colors">
-                                Technologies
+                                {{ t('tech') }}
                             </NuxtLink>
                         </li>
                         <li>
                             <NuxtLink :to="{ path: '/', hash: '#contact' }"
-                                class="hover:text-primary transition-colors">Contact
+                                class="hover:text-primary transition-colors">
+                                {{ t('contact') }}
                             </NuxtLink>
                         </li>
                     </ul>
                 </div>
                 <div class="text-center">
-                    <h3 class="text-lg font-bold text-primary mb-4">Connect with Me</h3>
+                    <h3 class="text-lg font-bold text-primary mb-4">{{ t("follow") }}</h3>
                     <ul class="flex space-x-4 justify-center">
                         <li>
                             <a href="https://www.linkedin.com/in/leon-krieger-97b046262/" target="_blank"
@@ -89,8 +92,39 @@
 
             <!-- Bottom Bar -->
             <div class="mt-8 text-center text-sm text-muted-foreground">
-                &copy; {{ new Date().getFullYear() }} Krieger IT. All Rights Reserved.
+                &copy; {{ new Date().getFullYear() }} Krieger IT. {{ t('rights') }}
             </div>
         </div>
     </footer>
 </template>
+
+<script setup lang="ts">
+const { t } = useI18n({ useScope: 'local' });
+</script>
+
+<i18n lang="json">{
+    "en": {
+        "home": "Home",
+        "services": "Services",
+        "tech": "Technologies",
+        "contact": "Contact",
+        "imprint": "Imprint",
+        "privacy": "Privacy Policy",
+        "info": "Info",
+        "links": "Quick Links",
+        "follow": "Follow Me",
+        "rights": "All Rights Reserved."
+    },
+    "de": {
+        "home": "Startseite",
+        "services": "Dienstleistungen",
+        "tech": "Technologien",
+        "contact": "Kontakt",
+        "imprint": "Impressum",
+        "privacy": "Datenschutzerklärung",
+        "info": "Info",
+        "links": "Schnellzugriff",
+        "follow": "Folge Mir",
+        "rights": "Alle Rechte vorbehalten."
+    }
+}</i18n>
