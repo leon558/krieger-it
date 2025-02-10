@@ -16,6 +16,9 @@
                                 {{ t('privacy') }}
                             </NuxtLink>
                         </li>
+                        <li>
+                            <a href="#" id="open_preferences_center">Cookies</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="text-center">
