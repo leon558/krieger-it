@@ -1,6 +1,6 @@
 <template>
     <main>
-        <section id="home" class="pb-20 px-4 pt-38 -mt-18 bg-linear-to-b from-primary/80 to-background">
+        <section id="home" class="pb-20 px-4 pt-38 -mt-18">
             <Hero />
         </section>
         <section id="about" class="-mt-18 pt-24 px-4 mb-20">
