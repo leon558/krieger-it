@@ -29,4 +29,5 @@ const checkMenu = ($event : Event) => {
         headerRef.value.isMenuOpen = false;
     }
 }
+
 </script>

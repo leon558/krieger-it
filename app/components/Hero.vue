@@ -1,7 +1,7 @@
 <template>
     <div class="max-w-6xl mx-auto text-center">
         <h1 class="text-4xl md:text-6xl font-bold mb-6">
-            {{ t("text") }}
+            {{ global?.title }}
         </h1>
         <p class="text-xl text-muted-foreground mb-6 max-w-3xl mx-auto">
             {{ t("subtext") }}
@@ -11,6 +11,12 @@
 
 <script setup lang="ts">
 const { t } = useI18n({ useScope: 'local' });
+const { $directus, $readSingleton } = useNuxtApp()
+
+const { data: global } = await useAsyncData('global', () => {
+    return $directus.request($readSingleton('global'))
+})
+
 </script>
 
 <i18n lang="json">{

@@ -27,7 +27,7 @@ export default defineNuxtConfig({
         vueI18n: "./i18n.config.ts",
     },
     turnstile: {
-        siteKey: "0x4AAAAAAA7jC_DbymdA6GZC",
+        siteKey: "1x00000000000000000000AA",
     },
     modules: [
         "nitro-cloudflare-dev",

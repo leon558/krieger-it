@@ -94,8 +94,12 @@
             </div>
 
             <!-- Bottom Bar -->
-            <div class="mt-8 text-center text-sm text-muted-foreground">
-                &copy; {{ new Date().getFullYear() }} Krieger IT. {{ t('rights') }}
+            <div class="mt-8 text-center text-sm text-muted-foreground border-t border-border pt-4">
+                <div class="flex items-center justify-center space-x-2">
+                    <span>&copy; {{ new Date().getFullYear() }} Krieger IT</span>
+                    <span class="text-primary">&bull;</span>
+                    <span>{{ t('rights') }}</span>
+                </div>
             </div>
         </div>
     </footer>
