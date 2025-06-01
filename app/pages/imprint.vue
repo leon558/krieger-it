@@ -13,6 +13,8 @@ useRoute('imprint');
                 53757 Sankt Augustin<br />
                 Deutschland</p><br />
 
+            <p>USt-IdNr: DE453533419</p><br />
+
             <h2 class="text-xl">Kontakt</h2>
             <p>Telefon: +49 (0) 2241 26159 13<br />
                 E-Mail: info@krieger.biz</p><br />
