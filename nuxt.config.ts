@@ -23,8 +23,24 @@ export default defineNuxtConfig({
             scrollBehaviorType: "smooth",
         },
     },
+    site: { 
+        url: 'krieger.biz',
+        name: 'Krieger IT Software & Solutions'
+    }, 
     i18n: {
         vueI18n: "./i18n.config.ts",
+        locales: [
+            {
+                code: "en",
+                iso: "en-US",
+                name: "English",
+            },
+            {
+                code: "de",
+                iso: "de-DE",
+                name: "Deutsch",
+            }
+        ],
     },
     turnstile: {
         siteKey: "0x4AAAAAAA7jC_DbymdA6GZC",
@@ -34,5 +50,7 @@ export default defineNuxtConfig({
         "@nuxtjs/color-mode",
         "@nuxtjs/i18n",
         "@nuxtjs/turnstile",
+        "@nuxtjs/sitemap",
+        "@nuxtjs/robots",
     ],
 });
